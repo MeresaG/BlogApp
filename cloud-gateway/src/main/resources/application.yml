@@ -1,0 +1,38 @@
+server:
+  port: 9191
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: COMMENT-MICRO-SERVICE
+          uri: lb://COMMENT-MICRO-SERVICE
+          predicates:
+            - Path=/comments/**
+#          filters:
+#            - name: CircuitBreaker
+#              args:
+#                name: COMMENT-MICRO-SERVICE
+#                fallbackuri: forward:/commentServiceFallBack
+        - id: POST-MICRO-SERVICE
+          uri: lb://POST-MICRO-SERVICE
+          predicates:
+            - Path=/posts/**
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 4000
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
+

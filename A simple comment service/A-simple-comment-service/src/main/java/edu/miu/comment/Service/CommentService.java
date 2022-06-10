@@ -1,11 +1,12 @@
 package edu.miu.comment.Service;
 
+import edu.miu.comment.DTO.ResponseTemplate;
 import edu.miu.comment.Domain.Comment;
 
 import java.util.List;
 
 public interface CommentService {
-    public Comment save(Comment comment);
+    public ResponseTemplate save(Comment comment);
 
     public List<Comment> getAll();
 

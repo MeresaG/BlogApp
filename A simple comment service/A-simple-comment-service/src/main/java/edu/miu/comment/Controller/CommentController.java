@@ -1,5 +1,6 @@
 package edu.miu.comment.Controller;
 
+import edu.miu.comment.DTO.ResponseTemplate;
 import edu.miu.comment.Domain.Comment;
 import edu.miu.comment.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/posts/{id}/comments")
+@RequestMapping("/comments")
 public class CommentController {
 
     @Autowired
@@ -16,7 +17,7 @@ public class CommentController {
 
 
     @PostMapping
-    public Comment saveComment(@PathVariable Long id, @RequestBody Comment comment) {
+    public ResponseTemplate saveComment(@RequestBody Comment comment) {
        return commentService.save(comment);
     }
 

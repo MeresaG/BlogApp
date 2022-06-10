@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: post-micro-services
+    name: post-micro-service
   datasource:
     password: 1
     url: jdbc:postgresql://localhost:5432/posts
