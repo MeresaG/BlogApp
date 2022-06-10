@@ -1,10 +1,10 @@
-package edu.miu.userService;
+package edu.miu.post;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ASimpleUserServiceApplicationTests {
+class ASimplePostBlogServiceApplicationTestsRepo {
 
 	@Test
 	void contextLoads() {
