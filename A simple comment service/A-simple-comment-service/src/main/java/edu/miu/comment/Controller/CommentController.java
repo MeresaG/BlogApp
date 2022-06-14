@@ -6,6 +6,7 @@ import edu.miu.comment.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -17,13 +18,13 @@ public class CommentController {
 
 
     @PostMapping
-    public ResponseTemplate saveComment(@RequestBody Comment comment) {
-       return commentService.save(comment);
+    public ResponseTemplate saveComment(@Valid @RequestBody Comment comment) {
+        return commentService.save(comment);
     }
 
-    @GetMapping()
-    public List<Comment> getAllComments(){
-        return commentService.getAll();
+    @GetMapping("/post/{id}")
+    public List<Comment> getAllCommentsByPost(@PathVariable Long id){
+        return commentService.getAll(id);
     }
 
     @GetMapping("/{id}")
@@ -32,7 +33,7 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public Comment updateComment(@PathVariable Long id, @RequestBody Comment comment) {
+    public Comment updateComment(@PathVariable Long id, @Valid @RequestBody Comment comment) {
         return commentService.update(comment);
     }
 

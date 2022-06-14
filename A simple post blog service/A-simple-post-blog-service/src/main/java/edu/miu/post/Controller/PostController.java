@@ -1,12 +1,16 @@
 package edu.miu.post.Controller;
 
 import edu.miu.post.Domain.Post;
+import edu.miu.post.Domain.Roles;
 import edu.miu.post.Domain.User;
 import edu.miu.post.Service.PostService;
 import edu.miu.post.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.security.RolesAllowed;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -19,7 +23,7 @@ public class PostController {
     private UserService userService;
 
     @PostMapping
-    public Post savePost(@RequestBody Post post) {
+    public Post savePost(@Valid @RequestBody Post post) {
         //post.setAuthor(userService.get(pos));
         return postService.save(post);
     }
@@ -31,11 +35,18 @@ public class PostController {
 
     @GetMapping("/{id}")
     public Post getPost(@PathVariable Long id) {
+
         return postService.get(id);
     }
 
+    @KafkaListener(topics = "NewComment", groupId = "group_id")
+    public void consumer(String message) {
+        System.out.println(message);
+        //return message;
+    }
+
     @PutMapping("/{id}")
-    public Post updatePost(@PathVariable Long id, @RequestBody Post post) {
+    public Post updatePost(@PathVariable Long id, @Valid @RequestBody Post post) {
         post.setId(id);
         return postService.update(post);
     }
@@ -46,5 +57,6 @@ public class PostController {
         postService.delete(id);
         return post;
     }
+    
 
 }

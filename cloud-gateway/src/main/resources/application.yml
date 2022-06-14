@@ -19,7 +19,7 @@ spring:
         - id: POST-MICRO-SERVICE
           uri: lb://POST-MICRO-SERVICE
           predicates:
-            - Path=/posts/**
+            - Path=/posts/**,/users/**
 
 hystrix:
   command:

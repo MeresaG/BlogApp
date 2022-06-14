@@ -8,7 +8,7 @@ import java.util.List;
 public interface CommentService {
     public ResponseTemplate save(Comment comment);
 
-    public List<Comment> getAll();
+    public List<Comment> getAll(Long id);
 
     public Comment get(Long id);
 
